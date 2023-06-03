@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', async function ready() {
     enterLettersEl.value = letters;
 
     // validate the input
-    if (!/^[A-Z]{3,}$/.test(letters)) {
-      alert('Enter at least 3 letters!');
-      return;
-    }
+    // if (!/^[A-Z]{3,}$/.test(letters)) {
+    //   alert('Enter at least 3 letters!');
+    //   return;
+    // }
 
     var startTiming = performance.now();
     // find matching words
@@ -58,8 +58,12 @@ document.addEventListener('DOMContentLoaded', async function ready() {
 
   async function loadWordList() {
     var whichList = dictionarySelectorEl.value;
-    if (['tiny', 'short', 'long'].includes(whichList)) {
+    if (['tiny', 'short', 'long', 'russian'].includes(whichList)) {
       let wordList = await (await fetch(`${whichList}-wordlist.json`)).json();
+
+      // if russian - make every word to uppercase for consistency
+      if (whichList == 'russian')
+        wordList = wordList.map(el => el.toUpperCase());
 
       let startTiming = performance.now();
       let length = Wordy.loadWords(wordList);
