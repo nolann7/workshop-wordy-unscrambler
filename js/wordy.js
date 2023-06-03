@@ -5,11 +5,31 @@ export default {
 
 // ****************************
 
+// implementing trie tree to hold all our words in dict;
+const node = {};
+let isWord = Symbol('is-word');
+
 function loadWords(wordList) {
-  // TODO: implement a data structure for the array
-  // `wordList` parameter; return the number
-  // of entries inserted into the data structure
-  return 0;
+  let nodeCount = 0;
+
+  // if dictionary already have anything - clean it;
+  if (Object.keys(node).length > 0) node = {};
+
+  for (let word of wordList) {
+    let node = dict;
+    // lets iterate all letters of all words and put it in trie tree structure
+    for (let letter of word) {
+      if (!node[letter]) {
+        node[letter] = { [isWord]: false };
+        nodeCount++;
+      }
+      node = node[letter];
+    }
+    // make isWord true on last letter of the word;
+    node[isWord] = true;
+  }
+
+  return nodeCount;
 }
 
 function findWords(input) {
