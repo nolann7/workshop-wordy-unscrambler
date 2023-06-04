@@ -1,3 +1,5 @@
+import deePool from './external/deePool.mjs'
+
 export default {
   loadWords,
   findWords,
